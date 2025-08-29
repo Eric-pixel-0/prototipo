@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protótipo - Igreja Adventista Central</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* --- Reset Básico e Fontes --- */
+        body, h1, h2, h3, p, ul, li, a {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #333;
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Botões --- */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #0056b3;
+        }
+
+        .btn-primary:hover {
+            background-color: #003d82;
+        }
+
+        .btn-secondary {
+            background-color: #f0ad4e;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d89634;
+        }
+
+        /* --- Cabeçalho e Navegação --- */
+        .main-header {
+            background-color: #ffffff;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: #0056b3;
+        }
+
+        /* --- Seção de Banner (Hero) --- */
+        .hero-banner {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x600.png?text=Imagem+de+Fundo');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .hero-banner h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .hero-banner p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        /* --- Seção de Informações Rápidas --- */
+        .quick-info {
+            background-color: #fff;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .quick-info .container {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .info-box {
+            flex: 1;
+            min-width: 280px;
+            padding: 20px;
+        }
+
+        .info-box i {
+            font-size: 40px;
+            color: #0056b3;
+            margin-bottom: 15px;
+        }
+
+        .info-box h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        /* --- Seção de Notícias --- */
+        .news-section {
+            padding: 80px 0;
+        }
+
+        .news-section h2, .departments-section h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .news-card h3 {
+            padding: 20px 20px 10px;
+        }
+
+        .news-card p {
+            padding: 0 20px 20px;
+            line-height: 1.6;
+        }
+
+        .news-card a {
+            display: inline-block;
+            padding: 0 20px 20px;
+            text-decoration: none;
+            color: #0056b3;
+            font-weight: bold;
+        }
+
+        /* --- Seção de Departamentos --- */
+        .departments-section {
+            background-color: #e9ecef;
+            padding: 80px 0;
+        }
+
+        .departments-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .department-item {
+            background-color: #0056b3;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .department-item:hover {
+            background-color: #003d82;
+        }
+
+        /* --- Rodapé --- */
+        .main-footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 60px 0 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-content h4 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .footer-content p, .footer-content a {
+            color: #bdc3c7;
+            text-decoration: none;
+        }
+
+        .footer-about, .footer-links, .footer-contact {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-media {
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            color: #fff;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .footer-bottom p {
+            color: #bdc3c7;
+        }
+
+        /* --- Responsividade Básica --- */
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .main-nav {
+                width: 100%;
+            }
+            
+            .main-nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .hero-banner h1 {
+                font-size: 36px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/150x50.png?text=LOGO" alt="Logo da Igreja">
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Departamentos</a></li>
+                    <li><a href="#">Mídia</a></li>
+                    <li><a href="#">Notícias</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn btn-primary">Encontre uma Igreja</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-banner">
+            <div class="container">
+                <h1>Bem-vindo à nossa Comunidade</h1>
+                <p>Um lugar de fé, esperança e amor.</p>
+                <a href="#" class="btn btn-secondary">Nossa Programação</a>
+            </div>
+        </section>
+
+        <section class="quick-info">
+            <div class="container">
+                <div class="info-box">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Agenda</h3>
+                    <p>Confira nossos próximos eventos e programações especiais.</p>
+                </div>
+                <div class="info-box">
+                    <i class="fas fa-tv"></i>
+                    <h3>Ao Vivo</h3>
+                    <p>Assista aos nossos cultos e mensagens ao vivo.</p>
+                </div>
+                <div class="info-box">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>Pedidos de Oração</h3>
+                    <p>Envie seu pedido e nossa equipe irá orar por você.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <div class="container">
+                <h2>Últimas Notícias</h2>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <img src="https://via.placeholder.com/400x250.png?text=Notícia+1" alt="Imagem da notícia 1">
+                        <h3>Título da Notícia Principal</h3>
+                        <p>Um breve resumo sobre o acontecimento ou a notícia que está sendo destacada aqui...</p>
+                        <a href="#">Leia mais</a>
+                    </article>
+                    <article class="news-card">
+                        <img src="https://via.placeholder.com/400x250.png?text=Notícia+2" alt="Imagem da notícia 2">
+                        <h3>Outro Evento Importante</h3>
+                        <p>Um breve resumo sobre o acontecimento ou a notícia que está sendo destacada aqui...</p>
+                        <a href="#">Leia mais</a>
+                    </article>
+                    <article class="news-card">
+                        <img src="https://via.placeholder.com/400x250.png?text=Notícia+3" alt="Imagem da notícia 3">
+                        <h3>Destaque da Comunidade</h3>
+                        <p>Um breve resumo sobre o acontecimento ou a notícia que está sendo destacada aqui...</p>
+                        <a href="#">Leia mais</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="departments-section">
+            <div class="container">
+                <h2>Nossos Departamentos</h2>
+                <div class="departments-grid">
+                    <div class="department-item">Crianças</div>
+                    <div class="department-item">Jovens</div>
+                    <div class="department-item">Família</div>
+                    <div class="department-item">Música</div>
+                    <div class="department-item">Ação Social</div>
+                    <div class="department-item">Comunicação</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h4>Sobre Nós</h4>
+                    <p>Igreja Adventista do Sétimo Dia Central. Promovendo comunhão, relacionamento e missão.</p>
+                    <div class="social-media">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#">Eventos</a></li>
+                        <li><a href="#">Sermões</a></li>
+                        <li><a href="#">Estudos Bíblicos</a></li>
+                        <li><a href="#">Seja um Voluntário</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contato</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Endereço da Igreja, 123 - Centro</p>
+                    <p><i class="fas fa-phone"></i> (XX) XXXX-XXXX</p>
+                    <p><i class="fas fa-envelope"></i> contato@suaigreja.org</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nome da Sua Igreja. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
